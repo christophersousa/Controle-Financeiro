@@ -1,0 +1,32 @@
+{
+  "devedores": [
+    {
+      "id": 1,
+      "name": "Raissa Galdino",
+      "contato": "(88) 88888-88"
+    }
+
+  ],
+  "compras_devedores": [
+    {
+      "id": 1,
+      "id_devedores": 1,
+      "contas": [
+        {
+          "id": 1,
+          "name": "Celular",
+          "valor": 4000,
+          "parcela": 550,
+          "parcelas": "1/7",
+          "banco": "Nubank"
+        },
+        {
+          "id": 2,
+          "name": "Camisa",
+          "parcelas": "4/7",
+          "banco": "C6 Bank"
+        }
+      ]
+    }
+  ]
+}
