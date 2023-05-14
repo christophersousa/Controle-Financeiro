@@ -16,14 +16,18 @@
           "id": 1,
           "name": "Celular",
           "valor": 4000,
-          "parcela": 550,
-          "parcelas": "1/7",
+          "valor_parcela": 572.00,
+          "parcelas": 7,
+          "parcelas_pagas": 2,
           "banco": "Nubank"
         },
         {
           "id": 2,
           "name": "Camisa",
-          "parcelas": "4/7",
+          "valor": 4000,
+          "valor_parcela": 572.00,
+          "parcelas": 7,
+          "parcelas_pagas": 2,
           "banco": "C6 Bank"
         }
       ]

@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 
 import Toast from 'react-native-toast-message';
-import api from "../../services/api";
+import app from "../../services/api";
 import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../routes/models";
 import { TextInputMask } from 'react-native-masked-text';
@@ -29,7 +29,7 @@ export function NewDebtors(){
     async function addDebtors(data:NewDebtorsPropsForm){
         try {
             data.total_contas = 12
-            const res = await api.post('devedores', data)
+            const res = await app.addDebtor(data)
             console.log(res.data)
             return res.data
           } catch (e) {

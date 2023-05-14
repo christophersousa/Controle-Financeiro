@@ -19,8 +19,8 @@ export function Home(){
 
     useEffect(()=>{
         async function fetchApi() {
-            const result = await api.get("/devedores")
-            setDebtors(result.data)
+            const result = await api.getDebtors()
+            setDebtors(result)
         }
         fetchApi()
     },[])
@@ -54,6 +54,7 @@ export function Home(){
                 </TouchableOpacity>
             </View>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.body}>
+
                 {debtors.map((d, index)=>{
                     return <CardDebtors key={index} id={d.id} name={d.name} contato={d.contato}/>
                 })}

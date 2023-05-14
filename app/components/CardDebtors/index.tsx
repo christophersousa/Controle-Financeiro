@@ -16,12 +16,8 @@ export function CardDebtors({name, contato, id}:DebtorsInterface){
     }
 
     async function getAccounts() {
-        const result = await api.get("/compras_devedores", {
-            params: {
-                id: id
-            }
-        })
-        setAccounts(result.data[0])
+        const result = await api.getDebtor(id)
+        setAccounts(result)
     }
 
     useEffect(()=>{

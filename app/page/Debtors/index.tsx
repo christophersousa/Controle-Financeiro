@@ -7,6 +7,7 @@ import {Ionicons} from "@expo/vector-icons"
 import api from '../../services/api'
 import { AccountsInterface } from '../../interface/DebtorsInterface'
 import { CardAccount } from '../../components/CardAccount'
+import { BottomAdd } from '../../components/BottomAdd'
 
 export function Debtors(){
     const route = useRoute<RouteProp<RouterPropsDebtors, 'Detail'>>()
@@ -14,12 +15,20 @@ export function Debtors(){
     const navegation = useNavigation()
 
     async function getAccounts(id:number) {
-        const result = await api.get("/compras_devedores", {
-            params: {
-                id: id
-            }
-        })
-        setAccounts(result.data[0])
+        const result = await api.getDebtor(id)
+        setAccounts(result)
+    }
+
+    function valueMonth(){
+        return accounts?.contas.reduce((acc, account) => acc + account.valor_parcela,0)
+    }
+
+    function valueTotal(){
+        return accounts?.contas.reduce((acc, account) => acc + account.valor,0)
+    }
+
+    function handleAdd(){
+        console.log("Clicou")
     }
 
     useLayoutEffect(()=>{
@@ -28,18 +37,25 @@ export function Debtors(){
         })
         getAccounts(route.params?.id)
     },[route.params?.name, route.params?.id])
+
     return(
         <SafeAreaView style={styles.container}>
+
+            <BottomAdd
+                icon='add'
+                handleBottom={handleAdd}
+            />
+
             <View style={styles.containerCard}>
 
                 <View style={styles.cardMensal}>
                     <Text style={styles.textCard}>Mensal</Text>
-                    <Text style={styles.valueCard}>R$1.800,00</Text>
+                    <Text style={styles.valueCard}>{Number(valueMonth()).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</Text>
                 </View>
                 <View style={styles.cardMensal}>
 
                     <Text style={styles.textCard}>Total</Text>
-                    <Text style={styles.valueCard}>R$5.000,00</Text>
+                    <Text style={styles.valueCard}>{Number(valueTotal()).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</Text>
                 </View>
             </View>
             <View style={styles.form}>
@@ -53,13 +69,15 @@ export function Debtors(){
             </View>
 
             <ScrollView>
-                {accounts?.contas.map((account) => (
+                {accounts?.contas.map((account, index) => (
                     <CardAccount
+                        key={index}
                         valor={account.valor}
-                        parcela={account.parcela}
+                        valor_parcela={account.valor_parcela}
                         parcelas={account.parcelas}
+                        parcelas_pagas={account.parcelas_pagas}
                         name={account.name}
-                        bancos={account.bancos}
+                        banco={account.banco}
                         id={account.id}
                     />))}
             </ScrollView>

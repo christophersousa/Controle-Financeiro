@@ -2,14 +2,27 @@ import { Pressable, Text, StyleSheet } from "react-native";
 import {Ionicons } from "@expo/vector-icons"
 
 interface PropsBottom {
-    icon?: String;
+    icon: String;
     handleBottom: ()=>void
 }
 
 export function BottomAdd({icon, handleBottom}:PropsBottom){
+
+    function setIcon(icon:String){
+        switch (icon) {
+            case 'person-add':
+                return  <Ionicons name='person-add' size={22} color="#fff" />
+                break;
+
+            default:
+                return  <Ionicons name='add' size={24} color="#fff" />
+                break;
+        }
+    }
+
     return(
         <Pressable style={styles.container} onPress={handleBottom}>
-            <Ionicons name='person-add' size={24} color="#fff" />
+            {setIcon(icon)}
             <Text style={styles.text}>Adicionar</Text>
         </Pressable>
     )
@@ -27,7 +40,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         zIndex: 99,
-        gap: 8
+        gap: 5
     },
     text:{
         color: "#fff",

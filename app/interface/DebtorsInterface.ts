@@ -15,7 +15,8 @@ export interface AccountInterface{
     id: number;
     name: string;
     valor: number;
-    parcela: number;
-    parcelas: string;
-    bancos: string;
+    valor_parcela: number;
+    parcelas: number;
+    parcelas_pagas: number;
+    banco: string;
 }
